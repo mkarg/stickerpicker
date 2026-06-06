@@ -27,19 +27,16 @@ from . import matrix
 open_utf8 = partial(open, encoding='UTF-8')
 
 def convert_image(data: bytes, max_w=256, max_h=256) -> (bytes, int, int):
-    image: Image.Image = Image.open(BytesIO(data)).convert("RGBA")
-    new_file = BytesIO()
-    image.save(new_file, "png")
+    image: Image.Image = Image.open(BytesIO(data))
     w, h = image.size
     if w > max_w or h > max_h:
-        # Set the width and height to lower values so clients wouldn't show them as huge images
         if w > h:
             h = int(h / (w / max_w))
             w = max_w
         else:
             w = int(w / (h / max_h))
             h = max_h
-    return new_file.getvalue(), w, h
+    return data, w, h
 
 
 def add_to_index(name: str, output_dir: str) -> None:
