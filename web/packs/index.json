@@ -1,0 +1,6 @@
+{
+  "packs": [
+    "cheekies.json"
+  ],
+  "homeserver_url": "https://matrix.org"
+}
